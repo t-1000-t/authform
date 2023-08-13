@@ -9,7 +9,7 @@ const option = {
 async function connectionDB() {
   try {
     mongoose.set('strictQuery', false)
-    await mongoose.connect(mongodbUri, option)
+    await mongoose.connect(String(mongodbUri), option)
     console.log('MongoDB connect...')
   } catch (error) {
     console.log('MongoDB connection error :', error)
