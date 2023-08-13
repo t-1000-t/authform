@@ -3,8 +3,8 @@ require('dotenv').config()
 const isDev = process.env.NODE_ENV === 'development'
 const port = process.env.PORT || 5000
 console.log('isDev', isDev)
-console.log('process.env.URL_DEV', process.env.URL_DEV)
-console.log('process.env.URL_PROD', process.env.URL_PROD)
+// console.log('process.env.URL_DEV', process.env.URL_DEV)
+// console.log('process.env.URL_PROD', process.env.URL_PROD)
 // const appURL = isDev ? process.env.URL_DEV : process.env.URL_PROD
 
 module.exports = {
@@ -15,6 +15,6 @@ module.exports = {
   secretJwtKey: process.env.JWT_SECRET_KEY || 'you must write secret key in env',
   googleClientId: process.env.GOOGLE_CLIENT_ID,
   googleClientKey: process.env.GOOGLE_CLIENT_SECRET,
-  facebookAppId: process.env.FACEBOOK_APP_ID,
-  facebookAppSecret: process.env.FACEBOOK_APP_SECRET,
+//   facebookAppId: process.env.FACEBOOK_APP_ID,
+//   facebookAppSecret: process.env.FACEBOOK_APP_SECRET,
 }
