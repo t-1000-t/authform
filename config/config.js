@@ -8,7 +8,7 @@ console.log('isDev', isDev)
 // const appURL = isDev ? process.env.URL_DEV : process.env.URL_PROD
 
 module.exports = {
-  mongodbUri: process.env.MONGO_DB_URI || 'mongodb://localhost:27027',
+  mongodbUri: process.env.MONGO_DB_URI,
   port: port,
   mode: process.env.NODE_ENV || 'production',
   appUrl: isDev ? process.env.URL_DEV : process.env.URL_PROD,
