@@ -3,15 +3,15 @@ const JwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
 // const LocalStrategy = require('passport-local').Strategy
 // const FacebookStrategy = require('passport-facebook').Strategy
-const GoogleStrategy = require('passport-google-oauth20').Strategy
+// const GoogleStrategy = require('passport-google-oauth20').Strategy
 
 const User = require('../src/users/users.model')
 
 const {
   secretJwtKey,
-  appUrl,
-  googleClientId,
-  googleClientKey,
+  // appUrl,
+  // googleClientId,
+  // googleClientKey,
   // facebookAppId,
   // facebookAppSecret
 } = require('../config/config')
@@ -43,37 +43,4 @@ module.exports = function (passport) {
       done(err, user)
     })
   })
-
-  passport.use(
-    new GoogleStrategy(
-      {
-        clientID: googleClientId,
-        clientSecret: googleClientKey,
-        callbackURL: `${appUrl}/api/auth/google/callback`,
-      },
-      async (accessToken, refreshToken, profile, done) => {
-        try {
-          const user = await User.findOne({ googleId: profile.id })
-
-          if (user) {
-            return done(null, { ...user })
-          }
-          if (!user) {
-            const newUser = new User({
-              googleId: profile._json.sub,
-              name: profile._json.name,
-              photo: profile._json.picture,
-              email: profile._json.email,
-            })
-            const savedUser = await newUser.save()
-            const token = await savedUser.getJWT()
-
-            return done(null, { ...savedUser, token })
-          }
-        } catch (error) {
-          done(error, null)
-        }
-      },
-    ),
-  )
 }
