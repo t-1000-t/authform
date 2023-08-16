@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const isDev = process.env.NODE_ENV === 'development'
 const port = process.env.PORT || 5000
-console.log('isDev', isDev)
+// console.log('isDev', isDev)
 // console.log('process.env.URL_DEV', process.env.URL_DEV)
 // console.log('process.env.URL_PROD', process.env.URL_PROD)
 // const appURL = isDev ? process.env.URL_DEV : process.env.URL_PROD

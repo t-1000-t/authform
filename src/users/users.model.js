@@ -24,8 +24,8 @@ const userSchema = new Schema(
     },
     name: String,
     photo: String,
-    googleId: String,
-    facebookId: String,
+    // googleId: String,
+    // facebookId: String,
   },
   {
     timestamps: true,
