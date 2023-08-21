@@ -6,7 +6,7 @@ const register = require('./register')
 // const { appUrl } = require('../../config/config')
 router
   .post('/login', login)
-  .post('/register', register)
+  .post('/signup', register)
   // .post('/logout', (req, res) => {})
   // .get(
   //   '/google',

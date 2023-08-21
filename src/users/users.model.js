@@ -3,9 +3,25 @@ const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const config = require('../../config/config')
+const uuid = require('uuid')
 
 const userSchema = new Schema(
   {
+    id: {
+      type: String,
+      default: uuid.v4(),
+      require: true,
+    },
+    username: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    surname: {
+      type: String,
+      default: '',
+      trim: true,
+    },
     email: {
       type: String,
       index: true,
@@ -18,12 +34,25 @@ const userSchema = new Schema(
       type: String,
       minlength: 6,
     },
+    message: {
+      type: String || Number,
+      default: '',
+      trim: true
+    },
+    role: {
+      type: String,
+      default: 'user'
+    },
+    avatar: {
+      type: String,
+      default: 'https://i.ibb.co/hZkNrGH/avatar0.png'
+    },
     token: {
       type: String,
       default: null,
     },
-    name: String,
-    photo: String,
+    // name: String,
+    // photo: String,
     // googleId: String,
     // facebookId: String,
   },
@@ -35,7 +64,13 @@ const userSchema = new Schema(
 userSchema.methods.getPublicFields = function () {
   return {
     userData: {
+      id: this.id,
+      username: this.username,
+      surname: this.surname,
       email: this.email,
+      message: this.message,
+      avatar: this.avatar,
+      role: this.role,
     },
     token: this.token,
   }
