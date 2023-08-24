@@ -3,11 +3,12 @@ const router = express.Router()
 // const passport = require('passport')
 const login = require('./login')
 const register = require('./register')
+const logout = require('./logout')
 // const { appUrl } = require('../../config/config')
 router
   .post('/login', login)
   .post('/signup', register)
-  // .post('/logout', (req, res) => {})
+  .post('/logout', logout)
   // .get(
   //   '/google',
   //   passport.authenticate('google', {
