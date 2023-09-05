@@ -4,11 +4,13 @@ const router = express.Router()
 const login = require('./login')
 const register = require('./register')
 const logout = require('./logout')
+const verifyEmail = require('./verifyEmail')
 // const { appUrl } = require('../../config/config')
 router
   .post('/login', login)
   .post('/signup', register)
   .post('/logout', logout)
+  .post('/verify', verifyEmail)
   // .get(
   //   '/google',
   //   passport.authenticate('google', {
