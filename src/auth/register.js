@@ -1,12 +1,13 @@
 const { Users } = require('../users')
 const login = require('./login')
+const crypto = require('crypto')
 
 module.exports = async (req, res) => {
   try {
     const body = req.body
 
     if (body.password && body.email) {
-      const user = await new Users(body)
+      const user = await new Users({ password: body.password, email: body.email, emailToken:crypto.randomBytes(64).toString('hex') })
 
       const result = await user.save()
 

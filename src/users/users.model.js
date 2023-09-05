@@ -34,6 +34,8 @@ const userSchema = new Schema(
       type: String,
       minlength: 6,
     },
+    isVerified: {type: Boolean, default: false},
+    emailToken: {type: String, default: null},
     message: {
       type: String || Number,
       default: '',
@@ -71,6 +73,8 @@ userSchema.methods.getPublicFields = function () {
       message: this.message,
       avatar: this.avatar,
       role: this.role,
+      isVerified: this.isVerified,
+      emailToken: this.emailToken,
     },
     token: this.token,
   }

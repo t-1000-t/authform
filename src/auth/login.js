@@ -12,6 +12,7 @@ module.exports = async (req, res) => {
       user.getJWT()
 
       const respondUserData = user.getPublicFields()
+
       passwordCompare
         ? res.send(respondUserData)
         : res.status(404).json({ message: 'Email or password not correct' })
