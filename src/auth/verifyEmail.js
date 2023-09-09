@@ -10,7 +10,7 @@ const verifyEmail = async (req, res) => {
 
         const user = await Users.findOne({ emailToken })
 
-        console.log('user Verify', user)
+        // console.log('user Verify', user)
 
         if (user) {
             // user.emailToken = null
