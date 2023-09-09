@@ -3,15 +3,19 @@ const { createMailTransporter } = require('./createMailTransporter')
 const sendVerifictionMail = (user) => {
     const transporter = createMailTransporter()
 
+    // console.log('user - ', user)
+
     const mailOptions = {
-        form: '"AuthForm App" <testenet@ukr.net>',
+        from: '"AuthForm App" <admin@ballybar.site>',
         to: user.email,
         subject: 'Verify your email...',
-        html: `<p>Hello ${user.name}, verify your email by click this link ... </p>
-        <a href = '${process.env.CLIENT_URL}/verify?emailToken=${user.emailToken}'>Verify Your Email</a>`,
+        html: `<p>Hello ${user.username}, verify your email by click this link ... </p>
+        <a href='${process.env.CLIENT_URL}/verify/${user.emailToken}'>Verify Your Email</a>`,
     }
 
-    transporter.sendMail(mailOptions, () => {
+    // console.log('mailOptions', mailOptions)
+
+    transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.log(error)
             } else {

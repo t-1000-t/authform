@@ -4,16 +4,13 @@ const crypto = require('crypto')
 
 const verifyEmail = async (req, res) => {
     try {
+        const { emailToken } = req.params
 
-        const emailToken = req.body.emailToken
-
-        if (!emailToken) return res.status(404).json("EmailToken not found...")
-
-        console.log('emailToken', emailToken)
+        if (!emailToken) return res.status(404).json("Email Token not found...")
 
         const user = await Users.findOne({ emailToken })
 
-        console.log('user', user)
+        console.log('user Verify', user)
 
         if (user) {
             // user.emailToken = null

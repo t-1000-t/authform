@@ -10,7 +10,9 @@ router
   .post('/login', login)
   .post('/signup', register)
   .post('/logout', logout)
-  .post('/verify', verifyEmail)
+  // .post('/verify', verifyEmail)
+  .get('/verify/:emailToken', verifyEmail)
+
   // .get(
   //   '/google',
   //   passport.authenticate('google', {

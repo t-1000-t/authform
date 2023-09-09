@@ -1,5 +1,6 @@
 const { Users } = require('../users')
 const login = require('./login')
+const { sendVerifictionMail } = require('../../middleware/sendVerificationMail')
 const crypto = require('crypto')
 
 module.exports = async (req, res) => {
@@ -7,9 +8,11 @@ module.exports = async (req, res) => {
     const body = req.body
 
     if (body.password && body.email) {
-      const user = await new Users({ password: body.password, email: body.email, emailToken:crypto.randomBytes(64).toString('hex') })
+      const user = await new Users({ ...body, password: body.password, email: body.email, emailToken:crypto.randomBytes(64).toString('hex') })
 
       const result = await user.save()
+
+      sendVerifictionMail(result)
 
       if (result) {
         // res.status(201).json({ user: result })
