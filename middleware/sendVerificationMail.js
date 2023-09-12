@@ -11,12 +11,10 @@ const sendVerifictionMail = (user) => {
         subject: 'Verify your email...',
         html: `<p>Hello ${user.username}, verify your email by click this link verify</p>
         <a href='${process.env.CLIENT_URL}/api/auth/verify/${user.emailToken}'>
-            Verify</a>
-            <p>If you can't click, copy this:
-            
-            ${process.env.CLIENT_URL}/api/auth/verify/${user.emailToken}
-            
-            and put in your browser address. </p>`,
+            Verify Email</a>
+            <p>If you can't click, copy this:</p>
+            <p><i>${process.env.CLIENT_URL}/api/auth/verify/${user.emailToken}</i></p>
+            <p>and put in your browser address. </p>`,
     }
 
     // console.log('mailOptions', mailOptions)
