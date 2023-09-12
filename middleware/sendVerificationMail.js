@@ -9,9 +9,14 @@ const sendVerifictionMail = (user) => {
         from: '"AuthForm App" <admin@ballybar.site>',
         to: user.email,
         subject: 'Verify your email...',
-        html: `<p>Hello ${user.username}, verify your email by click this link ... </p>
+        html: `<p>Hello ${user.username}, verify your email by click this link verify</p>
         <a href='${process.env.CLIENT_URL}/api/auth/verify/${user.emailToken}'>
-            Verify Your Email</a>`,
+            Verify</a>
+            <p>If you can't click, copy this:
+            
+            ${process.env.CLIENT_URL}/api/auth/verify/${user.emailToken}
+            
+            and put in your browser address. </p>`,
     }
 
     // console.log('mailOptions', mailOptions)
