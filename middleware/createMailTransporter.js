@@ -4,7 +4,7 @@ const createMailTransporter = (userEmail) => {
 
     const emailHost = {
         // service: process.env.EMAIL_SERVICE,
-        host: process.env.EMAIL_DOMEN,
+        host: process.env.EMAIL_HOST,
         port: Number(process.env.EMAIL_PORT),
         // secure: Boolean(process.env.EMAIL_SECURE),
         // secureConnection: Boolean(process.env.EMAIL_SECURE_CONNECTION),
@@ -34,8 +34,8 @@ const createMailTransporter = (userEmail) => {
     }
 
     console.log('userEmail', userEmail)
-    console.log('email user', process.env.EMAIL_USER)
-    console.log('email has "gmail"', process.env.EMAIL_USER.includes('gmail'))
+    console.log('userEmail has "gmail"', userEmail.includes('gmail'))
+    console.log('emailHost', emailHost)
 
     const transporter = nodemailer.createTransport(emailHost)
 

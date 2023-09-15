@@ -1,7 +1,7 @@
 const { createMailTransporter } = require('./createMailTransporter')
 
 const sendVerificationMail = (user) => {
-    const transporter = createMailTransporter()
+    const transporter = createMailTransporter(user.email)
 
     // console.log('user - ', user)
 

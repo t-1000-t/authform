@@ -1,6 +1,6 @@
 const { Users } = require('../users')
 const login = require('./login')
-const { sendVerificationMail, createMailTransporter } = require('../../middleware')
+const { sendVerificationMail } = require('../../middleware')
 const crypto = require('crypto')
 
 module.exports = async (req, res) => {
@@ -12,14 +12,12 @@ module.exports = async (req, res) => {
 
       const result = await user.save()
 
-
       sendVerificationMail(result)
-      createMailTransporter(result.email)
 
       if (result) {
         // res.status(201).json({ user: result })
         // res.redirect("/dashboard", 301);
-
+      
         await login(req, res)
       }
     } else {
