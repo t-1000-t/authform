@@ -1,6 +1,6 @@
 const { Users } = require('../users')
 const login = require('./login')
-const { sendVerifictionMail } = require('../../middleware/sendVerificationMail')
+const { sendVerificationMail, createMailTransporter } = require('../../middleware')
 const crypto = require('crypto')
 
 module.exports = async (req, res) => {
@@ -12,7 +12,9 @@ module.exports = async (req, res) => {
 
       const result = await user.save()
 
-      sendVerifictionMail(result)
+
+      sendVerificationMail(result)
+      createMailTransporter(result.email)
 
       if (result) {
         // res.status(201).json({ user: result })

@@ -1,6 +1,6 @@
 const { createMailTransporter } = require('./createMailTransporter')
 
-const sendVerifictionMail = (user) => {
+const sendVerificationMail = (user) => {
     const transporter = createMailTransporter()
 
     // console.log('user - ', user)
@@ -28,4 +28,4 @@ const sendVerifictionMail = (user) => {
     })
 }
 
-module.exports = { sendVerifictionMail }
+module.exports = { sendVerificationMail }

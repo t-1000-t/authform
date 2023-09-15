@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer')
 
-const createMailTransporter = () => {
+const createMailTransporter = (userEmail) => {
 
     const emailHost = {
         // service: process.env.EMAIL_SERVICE,
@@ -33,6 +33,7 @@ const createMailTransporter = () => {
         },
     }
 
+    console.log('userEmail', userEmail)
     console.log('email user', process.env.EMAIL_USER)
     console.log('email has "gmail"', process.env.EMAIL_USER.includes('gmail'))
 
