@@ -3,10 +3,10 @@ const nodemailer = require('nodemailer')
 const createMailTransporter = (userEmail) => {
 
     const emailHost = {
-        // service: process.env.EMAIL_SERVICE,
         host: process.env.EMAIL_HOST,
-        // host: process.env.EMAIL_HOST_SPF,
         port: Number(process.env.EMAIL_PORT_GMAIL),
+        // service: process.env.EMAIL_SERVICE,
+        // host: process.env.EMAIL_HOST_SPF,
         // secure: Boolean(process.env.EMAIL_SECURE),
         // secureConnection: Boolean(process.env.EMAIL_SECURE_CONNECTION),
         // debug: Boolean(process.env.EMAIL_DEBUG),
@@ -18,12 +18,12 @@ const createMailTransporter = (userEmail) => {
     }
 
     const emailGmailHost = {
-        // host: process.env.EMAIL_HOST_GMAIL,
         host: process.env.EMAIL_HOST,
-        // host: process.env.EMAIL_HOST_SPF,
-        // service: String(process.env.EMAIL_SERVICE),
         port: Number(process.env.EMAIL_PORT_GMAIL),
         secure: Boolean(process.env.EMAIL_SECURE),
+        // host: process.env.EMAIL_HOST_GMAIL,
+        // host: process.env.EMAIL_HOST_SPF,
+        // service: String(process.env.EMAIL_SERVICE),
         // secureConnection: Boolean(process.env.EMAIL_SECURE_CONNECTION),
         // debug: Boolean(process.env.EMAIL_DEBUG),
         // logger: Boolean(process.env.EMAIL_LOGGER),
@@ -45,7 +45,7 @@ const createMailTransporter = (userEmail) => {
     // const emailObj = userEmail.includes('gmail') ? emailGmailHost : emailHost
 
     // const transporter = nodemailer.createTransport(emailObj)
-    const transporter = nodemailer.createTransport(emailHost)
+    const transporter = nodemailer.createTransport(emailGmailHost)
 
     return transporter
 }
