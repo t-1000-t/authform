@@ -1,9 +1,9 @@
 const { createMailTransporter } = require('./createMailTransporter')
 
 const sendVerificationMail = (user) => {
-    const transporter = createMailTransporter(user.email)
 
-    // console.log('user - ', user)
+    console.log('user.email send verification', user.email)
+    const transporter = createMailTransporter(user.email)
 
     const mailOptions = {
         from: '"AuthForm App" <admin@ballybar.site>',
