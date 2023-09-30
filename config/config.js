@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000
 // const appURL = isDev ? process.env.URL_DEV : process.env.URL_PROD
 
 module.exports = {
-  mongodbUri: process.env.MONGO_DB_URI || 'mongodb+srv://adminDB:YdEOxOstWHod0hfW@cluster0.lzouwnw.mongodb.net/db?retryWrites=true&w=majority',
+  mongodbUri: process.env.MONGO_DB_URI,
   port: port,
   mode: process.env.NODE_ENV || 'production',
   appUrl: isDev ? process.env.URL_DEV : process.env.URL_PROD,
