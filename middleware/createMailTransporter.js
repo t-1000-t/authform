@@ -2,39 +2,26 @@ const nodemailer = require('nodemailer')
 
 const createMailTransporter = (userEmail) => {
 
+     // from nic.ua housting
     const emailHost = {
         host: process.env.EMAIL_HOST,
         port: Number(process.env.EMAIL_PORT_GMAIL),
-        // service: process.env.EMAIL_SERVICE,
-        // host: process.env.EMAIL_HOST_SPF,
-        // secure: Boolean(process.env.EMAIL_SECURE),
-        // secureConnection: Boolean(process.env.EMAIL_SECURE_CONNECTION),
-        // debug: Boolean(process.env.EMAIL_DEBUG),
-        // logger: Boolean(process.env.EMAIL_LOGGER),
+        secure: Boolean(process.env.EMAIL_SECURE),
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
         }
     }
 
+    // for Gmail Api OAuth2 service
     const emailGmailHost = {
-        host: process.env.EMAIL_HOST,
-        port: Number(process.env.EMAIL_PORT_GMAIL),
-        secure: Boolean(process.env.EMAIL_SECURE),
-        // host: process.env.EMAIL_HOST_GMAIL,
-        // host: process.env.EMAIL_HOST_SPF,
-        // service: String(process.env.EMAIL_SERVICE),
-        // secureConnection: Boolean(process.env.EMAIL_SECURE_CONNECTION),
-        // debug: Boolean(process.env.EMAIL_DEBUG),
-        // logger: Boolean(process.env.EMAIL_LOGGER),
+        service: String(process.env.EMAIL_SERVICE),
         auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-            // user: process.env.EMAIL_USER_GMAIL,
-            // pass: process.env.EMAIL_PASS_GMAIL
-        },
-         tls: {
-            rejectUnauthorized: Boolean(process.env.EMAIL_UNAUTHORIZED)
+            type: process.env.GMAIL_CLIENT_TYPE,
+            user: process.env.EMAIL_USER_GMAIL,
+            clientId: process.env.GMAIL_CLIENT_ID,
+            clientSecret: process.env.GMAIL_CLIENT_SECRET,
+            refreshToken: process.env.GMAIL_REFRESH_TOKEN
         }
     }
 
