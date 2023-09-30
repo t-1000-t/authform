@@ -16,6 +16,7 @@ const createMailTransporter = (userEmail) => {
     // for Gmail Api OAuth2 service
     const emailGmailHost = {
         service: String(process.env.EMAIL_SERVICE),
+        port: Number(process.env.EMAIL_PORT_GMAIL),
         auth: {
             type: process.env.GMAIL_CLIENT_TYPE,
             user: process.env.EMAIL_USER_GMAIL,
@@ -25,7 +26,7 @@ const createMailTransporter = (userEmail) => {
         }
     }
 
-    // console.log('userEmail', userEmail)
+    console.log('emailGmailHost', emailGmailHost)
     // console.log(`'${userEmail.includes('gmail') ? 'emailGmailHost' : 'emailHost'}`, userEmail.includes('gmail') ? emailGmailHost : emailHost)
     
 
