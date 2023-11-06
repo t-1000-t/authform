@@ -26,7 +26,7 @@ const createMailTransporter = (userEmail) => {
         }
     }
 
-    console.log('emailGmailHost', emailGmailHost)
+    // console.log('emailGmailHost', emailGmailHost)
     // console.log(`'${userEmail.includes('gmail') ? 'emailGmailHost' : 'emailHost'}`, userEmail.includes('gmail') ? emailGmailHost : emailHost)
     
 
