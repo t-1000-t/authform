@@ -21,7 +21,7 @@ const sendVerificationMail = (user) => {
         if (error) {
             console.log(error)
             } else {
-            console.log("Verification email sent")
+            console.log("Verification email sent -->")
         }
     })
 }
