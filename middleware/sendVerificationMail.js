@@ -1,14 +1,12 @@
 const { createMailTransporter } = require('./createMailTransporter')
-// const { createMailAutoRefresh } = require('./createMailAutoRefresh')
 
 const sendVerificationMail = (user) => {
 
     console.log('user.email send verification', user.email)
     const transporter = createMailTransporter(user.email)
-    // const transporter = createMailAutoRefresh(user.email)
 
     const mailOptions = {
-        from: '"AuthForm App" <admin@ballybar.site>',
+        from: 'AuthForm App',
         to: user.email,
         subject: 'Verify your email...',
         html: `<p>Hello ${user.username}, verify your email by click this link verify</p>
@@ -18,8 +16,6 @@ const sendVerificationMail = (user) => {
             <p><i>${process.env.CLIENT_URL}/api/auth/verify/${user.emailToken}</i></p>
             <p>and put in your browser address. </p>`,
     }
-
-    // console.log('mailOptions', mailOptions)
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
