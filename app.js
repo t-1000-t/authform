@@ -22,7 +22,7 @@ require('./middleware/passport')(passport)
 app.use(passport.initialize())
 
 app.get('/', (req, res) => {
-  res.send('We are on the Web-BallyMullen server')
+  res.send('We are on the Web-AuthForm server')
 })
 
 app.use('/api', apiRouter)

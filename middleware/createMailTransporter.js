@@ -2,20 +2,18 @@ const nodemailer = require('nodemailer')
 
 const createMailTransporter = (userEmail) => {
 
-    // for Gmail Api OAuth2 service
-    const emailGmailHost = {
-        service: String(process.env.EMAIL_SERVICE),
-        port: Number(process.env.EMAIL_PORT_GMAIL),
+    const emailHost = {
+        service: process.env.EMAIL_SERVICE_GMAIL,
+        host: process.env.EMAIL_HOST_GMAIL,
+        secure: process.env.EMAIL_SECURE_GMAIL,
+        port: process.env.EMAIL_PORT_GMAIL,
         auth: {
-            type: process.env.GMAIL_CLIENT_TYPE,
             user: process.env.EMAIL_USER_GMAIL,
-            clientId: process.env.GMAIL_CLIENT_ID,
-            clientSecret: process.env.GMAIL_CLIENT_SECRET,
-            refreshToken: process.env.GMAIL_REFRESH_TOKEN
+            pass: process.env.EMAIL_PASS_GMAIL
         }
     }
 
-    const transporter = nodemailer.createTransport(emailGmailHost)
+    const transporter = nodemailer.createTransport(emailHost)
 
     return transporter
 }
