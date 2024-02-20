@@ -15,7 +15,13 @@ module.exports = async (req, res) => {
     }
 
     if (body.password && body.email) {
-      const user = await new Users({ ...body, password: body.password, email: body.email, emailToken:crypto.randomBytes(64).toString('hex') })
+      const user = await new Users({ ...body,
+         password: body.password,
+         email: body.email,
+         emailToken:crypto.randomBytes(64).toString('hex'),
+         idAvatar: generateCustomId(),
+         token: crypto.randomBytes(64).toString('hex')
+        })
 
       const result = await user.save()
 
