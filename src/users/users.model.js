@@ -78,9 +78,10 @@ userSchema.methods.getPublicFields = function () {
       email: this.email,
       message: this.message,
       avatar: this.avatar,
+      idAvatar: this.idAvatar,
       role: this.role,
       isVerified: this.isVerified,
-      emailToken: this.emailToken,
+      emailToken: this.emailToken
     },
     token: this.token,
   }
