@@ -21,7 +21,6 @@ module.exports = async (req, res) => {
          email: body.email,
          emailToken:crypto.randomBytes(64).toString('hex'),
          idAvatar: generateCustomId(),
-         token: crypto.randomBytes(64).toString('hex')
         })
 
       const result = await user.save()
