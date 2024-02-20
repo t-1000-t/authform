@@ -51,11 +51,11 @@ const userSchema = new Schema(
     },
     idAvatar: {
       type: String,
-      default: null
+      default: null,
     },
     token: {
       type: String,
-      default: null
+      default: null,
     },
     // name: String,
     // photo: String,

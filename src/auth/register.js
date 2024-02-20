@@ -2,6 +2,7 @@ const { Users } = require('../users')
 const login = require('./login')
 const { sendVerificationMail } = require('../../middleware')
 const crypto = require('crypto')
+const generateCustomId = require('../service/generateCustomId')
 
 module.exports = async (req, res) => {
   try {
