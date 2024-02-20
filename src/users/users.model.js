@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const config = require('../../config/config')
 const uuid = require('uuid')
+const generateCustomId = require('../service/generateCustomId')
 
 const userSchema = new Schema(
   {
@@ -48,6 +49,11 @@ const userSchema = new Schema(
     avatar: {
       type: String,
       default: 'https://i.ibb.co/hZkNrGH/avatar0.png'
+    },
+    idAvatar: {
+      type: String,
+      default: generateCustomId(),
+      require: true,
     },
     token: {
       type: String,
