@@ -109,7 +109,7 @@ userSchema.methods.validatePassword = function (password) {
 userSchema.methods.getJWT = function () {
   const token = jwt.sign(
     {
-      id: this._id,
+      id: this.id,
     },
     config.secretJwtKey,
     {
