@@ -1,5 +1,6 @@
 const { Users } = require('../users')
 const login = require('./login')
+const uuid = require('uuid')
 const { sendVerificationMail } = require('../../middleware')
 const crypto = require('crypto')
 const generateCustomId = require('../service/generateCustomId')
@@ -17,6 +18,7 @@ module.exports = async (req, res) => {
 
     if (body.password && body.email) {
       const user = await new Users({ ...body,
+         id: uuid.v4(),
          password: body.password,
          email: body.email,
          emailToken:crypto.randomBytes(64).toString('hex'),

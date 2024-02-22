@@ -3,13 +3,12 @@ const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const config = require('../../config/config')
-const uuid = require('uuid')
 
 const userSchema = new Schema(
   {
     id: {
       type: String,
-      default: uuid.v4(),
+      default: null,
       require: true,
     },
     username: {
