@@ -1,4 +1,4 @@
-const Users = require('../users/users.model')
+const Users = require('../models/User')
 const crypto = require('crypto')
 
 

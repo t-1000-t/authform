@@ -9,12 +9,18 @@ module.exports = async (req, res) => {
   try {
     const body = req.body
 
-    const user = await Users.findOne({ email: body.email })
-    if (user) {
-      res.status(301).json({ message: "user found! use your password, please" })
-      // res.redirect("/", 301)
-      return
+    const duplicate = await Users.findOne({ email: body.email }).lean().exec()
+
+    if(duplicate) {
+      return res.status(409).json({ message: 'Duplicate username' })
     }
+
+    // const user = await Users.findOne({ email: body.email })
+    // if (user) {
+    //   res.status(301).json({ message: "user found! use your password, please" })
+    //   // res.redirect("/", 301)
+    //   return
+    // }
 
     if (body.password && body.email) {
       const user = await new Users({ ...body,
@@ -36,10 +42,10 @@ module.exports = async (req, res) => {
         await login(req, res)
       }
     } else {
-      res.status(404).json({ message: 'Some required fields missing' })
+      res.status(400).json({ message: 'Some required fields missing' })
       // якщо даних немає перерендерити дану сторінку Реєстрації з потрібними ерорами
     }
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    res.status(400).json({ message: error.message })
   }
 }

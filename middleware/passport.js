@@ -5,7 +5,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt
 // const FacebookStrategy = require('passport-facebook').Strategy
 // const GoogleStrategy = require('passport-google-oauth20').Strategy
 
-const User = require('../src/users/users.model')
+const User = require('../src/models/User')
 
 const {
   secretJwtKey,
