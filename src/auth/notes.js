@@ -9,10 +9,8 @@ module.exports = async (req, res) => {
     const title = 'head note!'
 
     if (user) {
-        // console.log('user', user)
-        // console.log('title', title)
-         // Create and store the new user 
-    const note = await Notes.create({ user, title, text, completed: false })
+    
+    const note = await Notes.create({ email: user.email, user, title, text, completed: false })
 
     const notes = await Notes.find({ user: new ObjectId(note.user) }).lean()
 

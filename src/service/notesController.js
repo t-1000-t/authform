@@ -1,27 +1,24 @@
 const Note = require('../models/Note')
-const Users = require('../models/User')
 
 // @desc Get all notes 
 // @route GET /notes
 // @access Private
-const getAllNotes = async (req, res) => {
-    // Get all notes from MongoDB
-    const notes = await Note.find().lean()
-
-    // If no notes 
-    if (!notes?.length) {
-        return res.status(400).json({ message: 'No notes found' })
-    }
-
-    // Add username to each note before sending the response 
-    // See Promise.all with map() here: https://youtu.be/4lqJBBEpjRE 
-    // You could also do this with a for...of loop
-    const notesWithUser = await Promise.all(notes.map(async (note) => {
-        const user = await Users.findById(note.user).lean().exec()
-        return { ...note, username: user.username }
-    }))
-
-    res.json(notesWithUser)
+const getUserNotes = async (req, res) => {
+    try {
+        // Extract the user's identifier from the request (e.g., email)
+        console.log('req.body', req.body)
+        const { email } = req.body
+    
+        // Retrieve notes associated with the user from the database
+        const notesUser = await Notes.find({ user: email })
+    
+        console.log('notesUser', notesUser)
+        // Return the retrieved notes as a response
+        res.status(200).json({ notes })
+      } catch (error) {
+        console.error('Error fetching notes:', error)
+        res.status(500).json({ message: 'Internal Server Error' })
+      }
 }
 
 // @desc Create new note
@@ -115,7 +112,7 @@ const deleteNote = async (req, res) => {
 }
 
 module.exports = {
-    getAllNotes,
+    getUserNotes,
     createNewNote,
     updateNote,
     deleteNote
