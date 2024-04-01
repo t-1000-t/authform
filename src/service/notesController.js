@@ -6,13 +6,11 @@ const Note = require('../models/Note')
 const getUserNotes = async (req, res) => {
     try {
         // Extract the user's identifier from the request (e.g., email)
-        console.log('req.body', req.body)
         const { email } = req.body
     
         // Retrieve notes associated with the user from the database
         const notesUser = await Notes.find({ user: email })
     
-        console.log('notesUser', notesUser)
         // Return the retrieved notes as a response
         res.status(200).json({ notes })
       } catch (error) {

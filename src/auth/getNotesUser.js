@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
     try {
         // Extract the user's identifier from the request (e.g., email)
         const { email } = req.query
-    
+
         const user = await Users.findOne({ email: email })
 
         if (!user) {

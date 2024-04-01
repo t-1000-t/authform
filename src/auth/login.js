@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
 
     if (user) {
       const passwordCompare = user.validatePassword(body.password)
-      console.log('passwordCompare', passwordCompare); // Add this line for logging
+      // Add this line for logging
 
       user.getJWT()
 
