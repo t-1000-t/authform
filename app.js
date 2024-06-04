@@ -8,7 +8,8 @@ const config = require('./config/config')
 const apiRouter = require('./router/router')
 
 app.use(cors({
-  origin: process.env.CLIENT_FRONT_URL,
+  // origin: process.env.CLIENT_FRONT_URL,
+  origin: process.env.CLIENT_DOMAIN_URL,
   methods: ["GET", "POST"],
 }))
 
@@ -34,7 +35,8 @@ app.use('/api', apiRouter)
 
 const io = require('socket.io')(server, {
   cors: {
-    origin: `${process.env.CLIENT_FRONT_URL}`,
+    // origin: `${process.env.CLIENT_FRONT_URL}`,
+    origin: `${process.env.CLIENT_DOMAIN_URL}`,
     methods: [ "GET", "POST" ]
   },
   pingInterval: 2000,
