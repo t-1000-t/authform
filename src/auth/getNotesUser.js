@@ -9,10 +9,10 @@ module.exports = async (req, res) => {
         const user = await Users.findOne({ email: email })
 
         if (!user) {
-          return res.status(404).json({ message: 'User not found' });
-      }
+          return res.status(404).json({ message: 'User not found' })
+        }
 
-      const notesUser = await Notes.find({ email: email }).lean()
+        const notesUser = await Notes.find({ email: email }).lean()
 
         // Return the retrieved notes as a response
         res.status(200).json({ notes: notesUser })

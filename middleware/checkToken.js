@@ -1,12 +1,7 @@
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
-const Users = require('../src/models/User')
 
-module.exports = async (req, res, next) => {
-  // 1. get token from headers
-  // 2. slice Bearer
-  // 3. Check token by secretKey + time validation
-
+const checkToken = (Users) => async (req, res, next) => {
   const headerToken = req.headers['authorization']
 
   if (headerToken) {
@@ -16,7 +11,6 @@ module.exports = async (req, res, next) => {
 
       if (validToken) {
         req.user = await Users.findOne({ _id: validToken.id })
-
         next()
       } else {
         res.status(401).json({
@@ -29,5 +23,10 @@ module.exports = async (req, res, next) => {
       })
     }
   } else {
+    res.status(401).json({
+      message: 'Unauthorized',
+    })
   }
 }
+
+module.exports = checkToken

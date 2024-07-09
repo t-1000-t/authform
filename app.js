@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
   res.send('We are on the Web-AuthForm server')
 })
 
-app.use('/api', apiRouter)
+app.use('/api', apiRouter) 
 
 initializeSocket(server)
 
