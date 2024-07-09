@@ -15,13 +15,6 @@ module.exports = async (req, res) => {
       return res.status(409).json({ message: 'Duplicate username' })
     }
 
-    // const user = await Users.findOne({ email: body.email })
-    // if (user) {
-    //   res.status(301).json({ message: "user found! use your password, please" })
-    //   // res.redirect("/", 301)
-    //   return
-    // }
-
     if (body.password && body.email) {
       const user = await new Users({ ...body,
          id: uuid.v4(),
@@ -29,6 +22,7 @@ module.exports = async (req, res) => {
          email: body.email,
          emailToken:crypto.randomBytes(64).toString('hex'),
          idAvatar: generateCustomId(),
+         idSocketIO: body.idSocketIO
         })
 
       const result = await user.save()

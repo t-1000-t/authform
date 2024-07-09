@@ -35,6 +35,7 @@ const userSchema = new Schema(
       },
       isVerified: {type: Boolean, default: false},
       emailToken: {type: String, default: null},
+      idSocketIO: {type: String, default: null},
       message: {
         type: String || Number,
         default: '',
@@ -73,7 +74,8 @@ const userSchema = new Schema(
         idAvatar: this.idAvatar,
         role: this.role,
         isVerified: this.isVerified,
-        emailToken: this.emailToken
+        emailToken: this.emailToken,
+        idSocketIO: this.idSocketIO
       },
       token: this.token,
     }
