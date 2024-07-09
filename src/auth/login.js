@@ -6,15 +6,12 @@ module.exports = async (req, res) => {
     const body = req.body
     const user = await Users.findOne({ email: body.email })
 
-    console.log('body', body)
-
     if (user) {
       const passwordCompare = user.validatePassword(body.password)
       console.log('Password comparison result:', passwordCompare) // Add this line for logging
 
       if (passwordCompare) { // Check if the document is already being saved
   
-          user.idSocketIO = body.idSocketIO  // Update idSocketIO
           user.getJWT()
 
           try {

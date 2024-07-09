@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
          email: body.email,
          emailToken:crypto.randomBytes(64).toString('hex'),
          idAvatar: generateCustomId(),
-         idSocketIO: body.idSocketIO
+         idSocketIO: null
         })
 
       const result = await user.save()
