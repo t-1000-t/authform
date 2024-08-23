@@ -5,7 +5,7 @@ const getListUsers = (Users) => async (req, res) => {
         if (!usersList) {
             return res.status(404).json({message: 'List is not found'})
         }
-        
+
         res.status(200).json({ list: usersList })
     } catch (error) {
         res.status(500).json({ message: error.message })

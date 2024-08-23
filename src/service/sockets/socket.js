@@ -15,12 +15,22 @@ const initializeSocket = (server) => {
     console.log("User connected", socket.id)
     socket.emit("me", socket.id)
 
+    socket.on('userConnected', (data) => {
+      // console.log('data userConnected => ', data)
+    })
+
     socket.on("registerSocket", async (userId) => {
       try {
         const user = await User.findOne({ id: userId })
         if (user) {
           user.idSocketIO = socket.id
           await user.save()
+
+          // Emit event to update all clients about the updated idSocketIO
+          io.emit("updateUserSocket", {
+            userId: userId,
+            idSocketIO: socket.id
+          })
         }
 
       } catch (error) {
@@ -40,7 +50,7 @@ const initializeSocket = (server) => {
     socket.on("disconnect", () => {
       console.log("User Disconnected", socket.id)
       socket.broadcast.emit("callEnded")
-    });
+    })
   })
 }
 
