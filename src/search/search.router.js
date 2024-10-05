@@ -36,8 +36,8 @@ module.exports = async (req, res) => {
       
               // Extract prices
               const priceElements = article.querySelectorAll('.price .p_box .current');
-              const prices = Array.from(priceElements).map((priceElement) =>
-                priceElement.innerText.trim()
+              const prices = Array.from(priceElements).map((priceElement) => priceElement.innerText.replace(/\n/g, '').trim()
+              
               );
       
               // Extract ending time
@@ -73,7 +73,8 @@ module.exports = async (req, res) => {
             return extractedItems;
           });
       
-          await browser.close();
+
+          // await browser.close();
       
           // Return the extracted data as JSON
           res.json(items);
