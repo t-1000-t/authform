@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
         try {
           const browser = await puppeteer.launch({
             headless: true,
-            executablePath: '/usr/bin/chromium-browser', // Path to Chromium in Linux environments
+            executablePath: process.env.CHROME_BIN, // Path to Chromium in Linux environments
             args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for many cloud environments
           });
           const page = await browser.newPage();
@@ -75,7 +75,8 @@ module.exports = async (req, res) => {
           });
       
 
-          await browser.close()
+
+          await browser.close();
       
           // Return the extracted data as JSON
           res.json(items);
