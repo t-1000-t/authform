@@ -6,8 +6,8 @@ module.exports = async (req, res) => {
         try {
           const browser = await puppeteer.launch({
             headless: true,
-            executablePath: process.env.CHROME_BIN, // Path to Chromium in Linux environments
             args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for many cloud environments
+            executablePath: process.env.CHROME_PATH || '/usr/bin/google-chrome'
           });
           const page = await browser.newPage();
       
