@@ -7,7 +7,8 @@ module.exports = async (req, res) => {
           const browser = await puppeteer.launch({
             headless: true,
             args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for many cloud environments
-            executablePath: process.env.CHROME_PATH
+            executablePath: process.env.CHROME_PATH || '/app/.apt/usr/bin/google-chrome-stable'
+            // /app/.chrome-for-testing/chrome-linux64/chrome
           });
           const page = await browser.newPage();
       
