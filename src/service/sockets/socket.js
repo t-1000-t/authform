@@ -4,7 +4,7 @@ const User = require('../../models/User')
 const initializeSocket = (server) => {
   const io = socketIO(server, {
     cors: {
-      origin: `${process.env.CLIENT_DOMAIN_URL}`,
+      origin: `${process.env.CLIENT_DOMAIN_URL || process.env.CLIENT_DOMAIN_URL_SUB}`,
       methods: ["GET", "POST"]
     },
     pingInterval: 2000,
