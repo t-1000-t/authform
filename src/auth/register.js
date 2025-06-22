@@ -1,45 +1,40 @@
-const { Users } = require('../users')
-const login = require('./login')
-const uuid = require('uuid')
-const { sendVerificationMail } = require('../../middleware')
-const crypto = require('crypto')
-const generateCustomId = require('../service/generateCustomId')
+const { Users } = require('../users');
+const login = require('./login');
+const { v4: uuidv4 } = require('uuid');
+const { sendVerificationMail } = require('../../middleware');
+const crypto = require('crypto');
+const generateCustomId = require('../service/generateCustomId');
 
 module.exports = async (req, res) => {
   try {
-    const body = req.body
+    const { email, password, ...otherFields } = req.body;
 
-    const duplicate = await Users.findOne({ email: body.email }).lean().exec()
-
-    if(duplicate) {
-      return res.status(409).json({ message: 'Duplicate username' })
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Some required fields are missing' });
     }
 
-    if (body.password && body.email) {
-      const user = await new Users({ ...body,
-         id: uuid.v4(),
-         password: body.password,
-         email: body.email,
-         emailToken:crypto.randomBytes(64).toString('hex'),
-         idAvatar: generateCustomId(),
-         idSocketIO: null
-        })
+    const duplicate = await Users.findOne({ email }).lean().exec();
+    if (duplicate) {
+      return res.status(409).json({ message: 'Duplicate username' });
+    }
 
-      const result = await user.save()
+    const user = new Users({
+      ...otherFields,
+      id: uuidv4(),
+      email,
+      password,
+      emailToken: crypto.randomBytes(64).toString('hex'),
+      idAvatar: generateCustomId(),
+      idSocketIO: null,
+    });
 
-      sendVerificationMail(result)
+    const result = await user.save();
+    sendVerificationMail(result);
 
-      if (result) {
-        // res.status(201).json({ user: result })
-        // res.redirect("/dashboard", 301);
-      
-        await login(req, res)
-      }
-    } else {
-      res.status(400).json({ message: 'Some required fields missing' })
-      // якщо даних немає перерендерити дану сторінку Реєстрації з потрібними ерорами
+    if (result) {
+      await login(req, res);
     }
   } catch (error) {
-    res.status(400).json({ message: error.message })
+    res.status(500).json({ message: 'Internal Server Error', error: error.message });
   }
-}
+};
