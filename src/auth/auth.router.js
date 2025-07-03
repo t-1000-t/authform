@@ -8,6 +8,9 @@ const verifyEmail = require('./verifyEmail')
 const getNotesUser = require('./getNotesUser')
 const deleteNoteUser = require('./deleteNote')
 const cvdata = require('./cvdata')
+const generatePdf = require('../service/generatePdf')
+const getdatacv = require('./getdatacv')
+
 
 router
   .post('/login', login)
@@ -15,6 +18,8 @@ router
   .post('/logout', logout)
   .post('/notes', notes)
   .post('/cvdata', cvdata)
+  .post('/cvinfo', getdatacv)
+  .post('/cvpdf', generatePdf)
   .get('/notes', getNotesUser)
   .delete('/notes/:noteId', deleteNoteUser)
   .get('/verify/:emailToken', verifyEmail)
