@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const AutoIncrement = require('mongoose-sequence')(mongoose)
+
 
 const cvDataSchema = new mongoose.Schema(
     {
@@ -9,13 +9,17 @@ const cvDataSchema = new mongoose.Schema(
             ref: 'User'
         },
         data: {
-            type: String,
-            required: true
+            type: Object,
+            required: true,
+            ref: 'CVbody'
         },
         email: {
             type: String,
             require: true,
         },
+    },
+    {
+        timestamps: true
     }
 )
 
