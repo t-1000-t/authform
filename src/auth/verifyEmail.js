@@ -21,7 +21,7 @@ const verifyEmail = async (req, res) => {
             const token = crypto.randomBytes(64).toString('hex')
 
             res.status(200).json({
-                id:user.id,
+                id: user.id,
                 name: user.name,
                 email: user.email,
                 token,

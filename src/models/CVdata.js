@@ -3,12 +3,12 @@ const mongoose = require('mongoose')
 
 const cvDataSchema = new mongoose.Schema(
     {
-        user: {
+        userId: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: 'User'
         },
-        data: {
+        newData: {
             type: Object,
             required: true,
             ref: 'CVbody'
