@@ -1,9 +1,9 @@
-const { Users } = require('../users')
-const { Notes } = require('../users')
-const { ObjectId } = require('mongodb')
+const { Users, Notes } = require('../users')
+const { Types } = require('mongoose')
 
 module.exports = async (req, res) => {
   try {
+    console.log('test')
     const { text, email } = req.body
     const user = await Users.findOne({ email: email })
     const title = 'head note!'
@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
     
     const note = await Notes.create({ email: user.email, user, title, text, completed: false })
 
-    const notes = await Notes.find({ user: new ObjectId(note.user) }).lean()
+    const notes = await Notes.find({ user: new Types.ObjectId(note.user) }).lean()
 
     if (note) { // Created 
         return res.status(201).json({ notes })

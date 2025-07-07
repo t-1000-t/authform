@@ -1,5 +1,4 @@
-const { Users } = require('../users')
-const { Notes } = require('../users')
+const { Users, Notes } = require('../users')
 
 module.exports = async (req, res) => {
     try {

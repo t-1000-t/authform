@@ -11,7 +11,7 @@ const initializeSocket = require('./src/service/sockets/socket')
 app.use(cors({
   // origin: process.env.CLIENT_URL,
   origin: process.env.CLIENT_DOMAIN_URL || process.env.CLIENT_DOMAIN_URL_SUB,
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
 }))
 
 if (config.mode === 'development') {

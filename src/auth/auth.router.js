@@ -21,7 +21,7 @@ router
   .post('/cvinfo', getdatacv)
   .post('/cvpdf', generatePdf)
   .get('/notes', getNotesUser)
-  .delete('/notes/:noteId', deleteNoteUser)
+  .delete('/notes/:id', deleteNoteUser)
   .get('/verify/:emailToken', verifyEmail)
 
 module.exports = router
