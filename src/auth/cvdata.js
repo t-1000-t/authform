@@ -3,7 +3,7 @@ const { CVdata } = require('../users')
 
 module.exports = async (req, res) => {
     try {
-        const { data , email } = req.body
+        const { newData , email } = req.body
         const user = await Users.findOne({ email: email })
         if (!user) {
             return res.status(404).json({ message: 'User not found' })
@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
             { userId: user._id }, // find by userId
             {
                 $set: {
-                    email: user.email, userId: user._id, newData: data 
+                    email: user.email, userId: user._id, newData: newData 
                 }, // update this
             },
             { upsert: true, new: true, setDefaultsOnInsert: true } // options
