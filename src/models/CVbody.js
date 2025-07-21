@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const cvBodySchema = new mongoose.Schema(
     {
-        about: {
+        fullname: {
            type: String,
            require: true,
         },
