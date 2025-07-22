@@ -21,19 +21,6 @@ module.exports = async (req, res) => {
         )
 
         return res.status(200).json({ message: 'CV saved successfully', data: updatedCV })
-
-        // if (user) {
-        //     const dataResult = await CVdata.create({ email: user.email, userId: user._id, data })
-        //     console.log('dataResult', dataResult)
-        //     const idData = await CVdata.find({ user: dataResult.userId }).lean()
-        //     console.log('idData', idData)
-        //     if (dataResult) {
-        //         return res.status(201).json({idData})
-        //     } else {
-        //         return res.status(400).json({ message: 'Invalid data received' })
-        //     }
-        // }
-
     } catch (error) {
         console.error('Error:', error)
         res.status(500).json({ message: error.message })
