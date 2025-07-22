@@ -1,4 +1,18 @@
+# Heavy dependencies
 node_modules/puppeteer/
 node_modules/googleapis/
+
+# Development files
 node_modules/**/test/
 node_modules/**/docs/
+test/
+coverage/
+*.md
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
