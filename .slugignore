@@ -1,0 +1,4 @@
+node_modules/puppeteer/
+node_modules/googleapis/
+node_modules/**/test/
+node_modules/**/docs/
