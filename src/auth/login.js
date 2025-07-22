@@ -1,4 +1,3 @@
-const { logging } = require('googleapis/build/src/apis/logging')
 const { Users } = require('../users')
 
 module.exports = async (req, res) => {

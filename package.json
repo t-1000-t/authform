@@ -4,7 +4,7 @@
   "description": "AUTH",
   "main": "app.js",
   "engines": {
-    "node": "18.12.1"
+    "node": "20.18.0"
   },
   "scripts": {
     "start": "cross-env NODE_ENV=production node app.js",
@@ -29,7 +29,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.20",
+    "nodemon": "^2.0.22",
     "prettier": "^2.8.1"
   },
   "dependencies": {
@@ -43,7 +43,7 @@
     "express-react-views": "^0.11.0",
     "express-session": "^1.17.3",
     "fs": "^0.0.1-security",
-    "googleapis": "^128.0.0",
+    "googleapis": "^153.0.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.8.7",
     "mongoose-sequence": "^6.0.1",
@@ -52,9 +52,6 @@
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "puppeteer": "^23.4.1",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-router-dom": "^6.6.1",
     "shortid": "^2.2.16",
     "socket.io": "^4.7.5",
     "uuid": "^9.0.0"

@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer')
-// const { google } = require('googleapis')
 // const getQueryParam = require('../helper/getQueryParam')
 
 const { EMAIL_USER_GMAIL, 
