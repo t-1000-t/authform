@@ -19,7 +19,11 @@ const cvBodySchema = new mongoose.Schema(
                 location: String,
                 language: String,
                 img: String
-        }
+        },
+        education: {
+                diploma: String,
+                course: String,
+        },
     }
 )
 
