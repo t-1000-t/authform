@@ -3,7 +3,6 @@ const { Types } = require('mongoose')
 
 module.exports = async (req, res) => {
   try {
-    console.log('test')
     const { text, email } = req.body
     const user = await Users.findOne({ email: email })
     const title = 'head note!'

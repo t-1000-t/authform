@@ -1,18 +1,49 @@
 const mongoose = require('mongoose')
 
+const CVskills = new mongoose.Schema(
+    {
+      company: {type: String, require: true},
+      task: {type: String, require: true},
+      technologies: {type: String, require: true},
+      responsibilities: {type: String, require: true},
+    }
+)
 
-const cvDataSchema = new mongoose.Schema(
+const CVbody = new mongoose.Schema(
+    {
+        title: {
+            fullname: {
+                type: String,
+                require: true,
+            },
+            posname: {
+                type: String,
+                require: true
+            }
+        },
+        contacts: {
+                email: String,
+                linkedin: String,
+                location: String,
+                languages: String,
+                img: String
+        },
+        education: {
+                diploma: String,
+                course: String,
+        },
+        skills: [CVskills],
+    }
+)
+
+const CVdata = new mongoose.Schema(
     {
         userId: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: 'User'
         },
-        newData: {
-            type: Object,
-            ref: 'CVbody',
-            required: true,
-        },
+        newData: CVbody,
         email: {
             type: String,
             require: true,
@@ -23,4 +54,4 @@ const cvDataSchema = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('cv', cvDataSchema)
+module.exports = mongoose.model('cv', CVdata)
