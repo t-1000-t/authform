@@ -10,8 +10,8 @@ const cvDataSchema = new mongoose.Schema(
         },
         newData: {
             type: Object,
+            ref: 'CVbody',
             required: true,
-            ref: 'CVbody'
         },
         email: {
             type: String,

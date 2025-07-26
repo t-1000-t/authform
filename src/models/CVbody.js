@@ -1,4 +1,3 @@
-const { language } = require('googleapis/build/src/apis/language')
 const mongoose = require('mongoose')
 
 const cvBodySchema = new mongoose.Schema(
@@ -17,13 +16,17 @@ const cvBodySchema = new mongoose.Schema(
                 email: String,
                 linkedin: String,
                 location: String,
-                language: String,
+                languages: String,
                 img: String
         },
         education: {
                 diploma: String,
                 course: String,
         },
+        skills: {
+                type: Object,
+                ref: 'Skills',
+            },
     }
 )
 
