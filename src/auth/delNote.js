@@ -1,4 +1,4 @@
-const { Notes } = require('../users')
+const { Note } = require('../models')
 const { Types } = require('mongoose')
 
 module.exports = async (req, res) => {
@@ -6,9 +6,9 @@ module.exports = async (req, res) => {
         const { id } = req.params;
 
         // Perform deletion operation using the Notes model
-        const result = await Notes.findByIdAndDelete({ _id: new Types.ObjectId(id) })
+        const result = await Note.findByIdAndDelete({ _id: new Types.ObjectId(id) })
 
-        if (result.deletedCount === 1) {
+        if (result) {
             res.status(200).json({ message: "Note deleted successfully" })
         } else {
             res.status(404).json({ message: "Note not found" })

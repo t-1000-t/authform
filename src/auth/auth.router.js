@@ -6,10 +6,11 @@ const logout = require('./logout')
 const notes = require('./notes')
 const verifyEmail = require('./verifyEmail')
 const getNotesUser = require('./getNotesUser')
-const deleteNoteUser = require('./deleteNote')
+const delNoteUser = require('./delNote')
 const cvdata = require('./cvdata')
 const generatePdf = require('../service/generatePdf')
 const getdatacv = require('./getdatacv')
+const delSkill = require('./delSkillFromCv')
 
 
 router
@@ -21,7 +22,8 @@ router
   .post('/cvinfo', getdatacv)
   .post('/cvpdf', generatePdf)
   .get('/notes', getNotesUser)
-  .delete('/notes/:id', deleteNoteUser)
+  .delete('/notes/:id', delNoteUser)
+  .delete('/cv/:cvId/skills/:skillId', delSkill)
   .get('/verify/:emailToken', verifyEmail)
 
 module.exports = router

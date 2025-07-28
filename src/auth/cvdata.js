@@ -1,9 +1,9 @@
-const { Users, CVdata } = require('../models')
+const { User, CVdata } = require('../models')
 
 module.exports = async (req, res) => {
     try {
         const { newData , email } = req.body
-        const user = await Users.findOne({ email: email })
+        const user = await User.findOne({ email: email })
         if (!user) {
             return res.status(404).json({ message: 'User not found' })
         }
