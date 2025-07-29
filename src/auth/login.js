@@ -1,9 +1,9 @@
-const { Users } = require('../models')
+const { User } = require('../models')
 
 module.exports = async (req, res) => {
   try {
     const body = req.body
-    const user = await Users.findOne({ email: body.email })
+    const user = await User.findOne({ email: body.email })
 
     if (user) {
       const passwordCompare = user.validatePassword(body.password)

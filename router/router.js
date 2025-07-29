@@ -1,15 +1,15 @@
 const express = require('express')
 const { authRouter } = require('../src/auth')
 const { searchRouter } = require('../src/search')
-const { usersRouterFactory, getUser, getListUsers, Users, checkToken } = require('../src/users')
+const { usersRouterFactory, getUser, getListUsers, checkToken } = require('../src/users')
+const { User } = require('../src/models')
 
 
-
-// Inject Users into checkToken here
-const checkTokenMiddleware = checkToken(Users)
+// Inject User into checkToken here
+const checkTokenMiddleware = checkToken(User)
 
 // Create the users router with the necessary dependencies
-const usersRouter = usersRouterFactory(checkTokenMiddleware, getUser, getListUsers, Users)
+const usersRouter = usersRouterFactory(checkTokenMiddleware, getUser, getListUsers, User)
 
 const router = express.Router()
 router.use('/users', usersRouter)

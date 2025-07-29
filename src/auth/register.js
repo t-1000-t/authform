@@ -1,4 +1,4 @@
-const { Users } = require('../users');
+const { User } = require('../models');
 const login = require('./login');
 const { v4: uuidv4 } = require('uuid');
 const { sendVerificationMail } = require('../../middleware');
