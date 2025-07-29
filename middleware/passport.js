@@ -1,9 +1,7 @@
 /* eslint-disable no-undef */
 const JwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
-// const LocalStrategy = require('passport-local').Strategy
-// const FacebookStrategy = require('passport-facebook').Strategy
-// const GoogleStrategy = require('passport-google-oauth20').Strategy
+
 
 const User = require('../src/models/User')
 
