@@ -20,8 +20,6 @@ module.exports = async (req, res) => {
             throw new Error('CV not found or skill not found')
         }
 
-        return updatedCV
-
     } catch (error) {
         console.error('Error:', error)
         res.status(500).json({ message: error.message })
