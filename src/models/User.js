@@ -119,4 +119,4 @@ const userSchema = new Schema(
     return token
   }
   
-  module.exports = mongoose.model('Users', userSchema)
+  module.exports = mongoose.model('User', userSchema)

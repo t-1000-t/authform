@@ -1,6 +1,6 @@
-const getListUsers = (Users) => async (req, res) => {
+const getListUsers = (User) => async (req, res) => {
     try {
-        const usersList = await Users.find({}, 'id username surname email isVerified idSocketIO token')
+        const usersList = await User.find({}, 'id username surname email isVerified idSocketIO token')
 
         if (!usersList) {
             return res.status(404).json({message: 'List is not found'})

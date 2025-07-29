@@ -13,12 +13,12 @@ module.exports = async (req, res) => {
       return res.status(400).json({ message: 'Some required fields are missing' });
     }
 
-    const duplicate = await Users.findOne({ email }).lean().exec();
+    const duplicate = await User.findOne({ email }).lean().exec();
     if (duplicate) {
       return res.status(409).json({ message: 'Duplicate username' });
     }
 
-    const user = new Users({
+    const user = new User({
       ...otherFields,
       id: uuidv4(),
       email,

@@ -1,4 +1,4 @@
-const Users = require('../models/User')
+const User = require('../models')
 const crypto = require('crypto')
 
 
@@ -8,7 +8,7 @@ const verifyEmail = async (req, res) => {
 
         if (!emailToken) return res.status(404).json("Email Token not found...")
 
-        const user = await Users.findOne({ emailToken })
+        const user = await User.findOne({ emailToken })
 
         // console.log('user Verify', user)
 

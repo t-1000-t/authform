@@ -3,7 +3,7 @@ const { User } = require('../models')
 module.exports = async (req, res) => {
   try {
     const body = req.body
-    const user = await Users.findOne({ id: body.userId })
+    const user = await User.findOne({ id: body.userId })
 
     if (user) {
       // Invalidate the user's token here

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 
-const checkToken = (Users) => async (req, res, next) => {
+const checkToken = (User) => async (req, res, next) => {
   const headerToken = req.headers['authorization']
 
   if (headerToken) {
@@ -10,7 +10,7 @@ const checkToken = (Users) => async (req, res, next) => {
       const validToken = jwt.verify(token, config.secretJwtKey)
 
       if (validToken) {
-        req.user = await Users.findOne({ _id: validToken.id })
+        req.user = await User.findOne({ _id: validToken.id })
         next()
       } else {
         res.status(401).json({
