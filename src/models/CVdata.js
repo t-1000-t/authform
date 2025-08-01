@@ -33,6 +33,12 @@ const CVbody = new mongoose.Schema(
                 course: String,
         },
         skills: [CVskills],
+        pet: {
+            own: {type: String, require: true},
+            task: {type: String, require: true},
+            technologies: {type: String, require: true},
+            responsibilities: {type: String, require: true},
+        },
     }
 )
 
