@@ -7,6 +7,7 @@ const server = http.createServer(app)
 const config = require('./config/config')
 const apiRouter = require('./router/router')
 const initializeSocket = require('./src/service/sockets/socket')
+const { bootBot } = require('./src/bot/bootBot')
 
 app.use(cors({
   // origin: process.env.CLIENT_URL,
@@ -28,11 +29,17 @@ app.use(express.urlencoded({ extended: true }))
 require('./middleware/passport')(passport)
 app.use(passport.initialize())
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.send('We are on the Web-AuthForm server')
 })
 
 app.use('/api', apiRouter) 
+
+// ---- Telegram bot boot (after parsers, before server.listen)
+
+bootBot(app).catch((e) => {
+  console.error('Failed to boot Telegram bot:', e)
+})
 
 initializeSocket(server)
 
