@@ -11,6 +11,7 @@ const cvdata = require('./cvdata')
 const generatePdf = require('../service/generatePdf')
 const getdatacv = require('./getdatacv')
 const delSkill = require('./delSkillFromCv')
+const foobot = require('./foobot')
 
 
 router
@@ -21,9 +22,10 @@ router
   .post('/cvdata', cvdata)
   .post('/cvinfo', getdatacv)
   .post('/cvpdf', generatePdf)
+  .post('/foobot', foobot)
   .get('/notes', getNotesUser)
+  .get('/verify/:emailToken', verifyEmail)
   .delete('/notes/:id', delNoteUser)
   .delete('/cv/:cvId/skills/:skillId', delSkill)
-  .get('/verify/:emailToken', verifyEmail)
 
 module.exports = router
