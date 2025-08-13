@@ -11,7 +11,7 @@ const cvdata = require('./cvdata')
 const generatePdf = require('../service/generatePdf')
 const getdatacv = require('./getdatacv')
 const delSkill = require('./delSkillFromCv')
-const foobot = require('./foobot')
+const { telegramBot } = require('../bot/telegramBot')
 
 
 router
@@ -22,7 +22,7 @@ router
   .post('/cvdata', cvdata)
   .post('/cvinfo', getdatacv)
   .post('/cvpdf', generatePdf)
-  .post('/foobot', foobot)
+  .post('/foobot', telegramBot)
   .get('/notes', getNotesUser)
   .get('/verify/:emailToken', verifyEmail)
   .delete('/notes/:id', delNoteUser)
