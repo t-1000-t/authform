@@ -15,32 +15,41 @@ const CVbody = new mongoose.Schema(
             fullname: {
                 type: String,
                 require: true,
-            },
+                },
             posname: {
                 type: String,
                 require: true
-            }
-        },
+                }
+            },
         contacts: {
                 email: String,
                 linkedin: String,
                 location: String,
                 languages: String,
                 img: String
-        },
+            },
         education: {
                 diploma: String,
                 course: String,
-        },
+            },
+        competencies: {
+                languages: String,
+                ide: String,
+                vcs: String,
+                platform: String,
+                tracking: String,
+                db: String,
+                technologies: String,
+            },
         skills: [CVskills],
         pet: {
-            own: {type: String, require: true},
-            task: {type: String, require: true},
-            technologies: {type: String, require: true},
-            responsibilities: {type: String, require: true},
-        },
-    }
-)
+                own: {type: String, require: true},
+                task: {type: String, require: true},
+                technologies: {type: String, require: true},
+                responsibilities: {type: String, require: true},
+            },
+        }
+    )
 
 const CVdata = new mongoose.Schema(
     {
