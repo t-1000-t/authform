@@ -1,6 +1,7 @@
 // bot/telegramBot.js
 const { Telegraf, Markup } = require('telegraf')
 const axios = require('axios')
+const { getIO } = require('../service/sockets/socket') // adjust path if needed
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
@@ -24,15 +25,48 @@ async function googleSearch(query, num = 3) {
 
 // ---- Telegraf chat handlers
 function wireHandlers() {
-  bot.start((ctx) => ctx.reply('Send me a search query — I’ll Google it.'))
+  bot.start(async (ctx) => {
+    const chatId = ctx.chat.id
+    const userId = ctx.from.id
+    // console.log(`[TG]/start chat_id=${chatId} user_id=${userId} username=@${ctx.from.username || ''}`)
+    await ctx.reply(`Your chat_id is: ${chatId}\n(user_id: ${userId})`)
+  })
+
+  bot.command('id', (ctx) => {
+    ctx.reply(`chat_id: ${ctx.chat.id}\nuser_id: ${ctx.from.id}`)
+  })
+
+
+  // bot.start((ctx) => ctx.reply('Send me a search query — I’ll Google it.'))
   bot.hears(/^\/help/i, (ctx) => ctx.reply('Just send text to search.'))
+
   bot.on('text', async (ctx) => {
     const q = (ctx.message.text || '').trim()
     if (!q) return ctx.reply('Please send some text to search.')
 
+    // emit "incoming" event to all connected browsers
+    try {
+      getIO().emit('tg:incoming', {
+        from: { id: ctx.from.id, username: ctx.from.username },
+        q,
+        at: Date.now(),
+      })
+    } catch {} // if io not ready, ignore
+
     const notice = await ctx.reply(`🔎 Searching: ${q}`)
     try {
       const results = await googleSearch(q, 3)
+
+      // emit "results" to browsers
+      try {
+        getIO().emit('tg:results', {
+          from: { id: ctx.from.id, username: ctx.from.username },
+          q,
+          results,
+          at: Date.now(),
+        })
+      } catch {}
+
       if (!results.length) return ctx.reply('No results found.')
 
       let text = `Top results for: *${q}*\n\n`
@@ -69,4 +103,10 @@ async function telegramBot(req, res) {
   }
 }
 
-module.exports = { bot, wireHandlers, telegramBot } 
+function formatTelegramResults(q, results) {
+  let text = `Top results for: *${q}*\n\n`
+  for (const r of results) text += `${r.pos}. [${r.title}](${r.link})\n_${r.snippet}_\n\n`
+  return text
+}
+
+module.exports = { bot, wireHandlers, telegramBot, formatTelegramResults } 
