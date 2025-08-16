@@ -1,3 +1,4 @@
+// User.js
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')
@@ -37,7 +38,7 @@ const userSchema = new Schema(
       emailToken: {type: String, default: null},
       idSocketIO: {type: String, default: null},
       message: {
-        type: String || Number,
+        type: String,
         default: '',
         trim: true
       },
@@ -57,6 +58,7 @@ const userSchema = new Schema(
       // photo: String,
       // googleId: String,
       // facebookId: String,
+      botData: { type: Schema.Types.ObjectId, ref: 'Bot', default: null },
     },
     {
       timestamps: true,
@@ -75,9 +77,10 @@ const userSchema = new Schema(
         role: this.role,
         isVerified: this.isVerified,
         emailToken: this.emailToken,
-        idSocketIO: this.idSocketIO
+        idSocketIO: this.idSocketIO,
       },
       token: this.token,
+      botData: this.botData,
     }
   }
   
