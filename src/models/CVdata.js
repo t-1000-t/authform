@@ -55,7 +55,7 @@ const CVdata = new mongoose.Schema(
     {
         userId: {
             type: mongoose.Schema.Types.ObjectId,
-            required: true,
+            require: true,
             ref: 'User'
         },
         newData: CVbody,

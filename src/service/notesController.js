@@ -27,7 +27,7 @@ const createNewNote = async (req, res) => {
 
     // Confirm data
     if (!user || !title || !text) {
-        return res.status(400).json({ message: 'All fields are required' })
+        return res.status(400).json({ message: 'All fields are require' })
     }
 
     // Check for duplicate title
@@ -56,7 +56,7 @@ const updateNote = async (req, res) => {
 
     // Confirm data
     if (!id || !user || !title || !text || typeof completed !== 'boolean') {
-        return res.status(400).json({ message: 'All fields are required' })
+        return res.status(400).json({ message: 'All fields are require' })
     }
 
     // Confirm note exists to update
@@ -92,7 +92,7 @@ const deleteNote = async (req, res) => {
 
     // Confirm data
     if (!id) {
-        return res.status(400).json({ message: 'Note ID required' })
+        return res.status(400).json({ message: 'Note ID require' })
     }
 
     // Confirm note exists to delete 

@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
 
     // Validate input
     if (!email || !text) {
-      return res.status(400).json({ message: 'Email and text are required' })
+      return res.status(400).json({ message: 'Email and text are not require' })
     }
 
     const user = await User.findOne({ email: email })

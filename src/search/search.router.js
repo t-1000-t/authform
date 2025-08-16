@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
         try {
           const browser = await puppeteer.launch({
             headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for many cloud environments
+            args: ['--no-sandbox', '--disable-setuid-sandbox'], // Require for many cloud environments
             executablePath: process.env.CHROME_PATH
             // /app/.chrome-for-testing/chrome-linux64/chrome
           });

@@ -2,12 +2,12 @@
 const User = require('./User')
 const Note = require('./Note')
 const CVdata = require('./CVdata')
-const BOT = require('./BOT')
+const Bot = require('./BOT')
 
 
 module.exports = {
   User,
   Note,
   CVdata,
-  BOT,
+  Bot,
 }

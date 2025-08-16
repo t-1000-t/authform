@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     const { email, password, ...otherFields } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ message: 'Some required fields are missing' });
+      return res.status(400).json({ message: 'Some require fields are missing' });
     }
 
     const duplicate = await User.findOne({ email }).lean().exec();

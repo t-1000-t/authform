@@ -58,7 +58,7 @@ const userSchema = new Schema(
       // photo: String,
       // googleId: String,
       // facebookId: String,
-      botData: { type: Schema.Types.ObjectId, ref: 'Bot', default: null },
+      // botData: { type: Schema.Types.ObjectId, ref: 'Bot', default: null }
     },
     {
       timestamps: true,
@@ -80,7 +80,6 @@ const userSchema = new Schema(
         idSocketIO: this.idSocketIO,
       },
       token: this.token,
-      botData: this.botData,
     }
   }
   
