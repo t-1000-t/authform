@@ -3,9 +3,9 @@ const { Bot, User } = require("../models")
 
 module.exports = async (req, res) => {
     try {
-        const { chatId, email } = req.body
+        const { chatBotId, email } = req.body
     
-        if (!chatId || !email) {
+        if (!chatBotId || !email) {
             return res.status(400).json({ message: "Chat ID or Email are not require" })
         }
 
@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
             return res.status(400).json({ message: "User not faund" })
         }
 
-        const chatIdNum = Number(chatId)
+        const chatIdNum = Number(chatBotId)
         if (Number.isNaN(chatIdNum)) {
         return res.status(400).json({ message: "chatId must be a number" })
         }

@@ -14,7 +14,8 @@ const getdatacv = require('./getdatacv')
 const delSkill = require('./delSkillFromCv')
 const { telegramBot } = require('../bot/telegramBot')
 const getTalkBot = require('../bot/getTalkBot')
-const botChatId = require('./botChatId')
+const postChatId = require('./postChatId')
+const getChatId = require('./getChatId')
 
 
 router
@@ -27,7 +28,8 @@ router
   .post('/cvpdf', generatePdf)
   .post('/foobot', telegramBot)
   .post('/tg/send', getTalkBot)
-  .post('/tg/chat', botChatId)
+  .post('/tg/chat', postChatId)
+  .get('/tg/chat', getChatId)
   .get('/notes', getNotesUser)
   .get('/verify/:emailToken', verifyEmail)
   .delete('/notes/:id', delNoteUser)
