@@ -1,5 +1,6 @@
 // src/bot/bootBot.js
-const { bot, wireHandlers } = require('./telegramBot')
+const { wireHandlers } = require('./telegramBot')
+const { bot } = require('.')
 
 const PUBLIC_TG_URL = process.env.PUBLIC_TG_URL      // e.g. https://your-heroku-app.herokuapp.com
 const WEBHOOK_PATH  = process.env.WEBHOOK_PATH || '/tg/webhook'

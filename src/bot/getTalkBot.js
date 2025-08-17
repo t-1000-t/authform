@@ -1,5 +1,5 @@
 // getTalkBot.js
-const { bot } = require('./telegramBot')
+const { bot } = require('.')
 
 async function getTalkBot(req, res) {
     try {

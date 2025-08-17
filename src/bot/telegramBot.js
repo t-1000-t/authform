@@ -1,9 +1,6 @@
 // bot/telegramBot.js
-const { Telegraf, Markup } = require('telegraf')
-const axios = require('axios')
+const { bot, axios } = require('.')
 const { getIO } = require('../service/sockets/socket') // adjust path if needed
-
-const bot = new Telegraf(process.env.BOT_TOKEN)
 
 async function googleSearch(query, num = 3) {
   const { GOOGLE_API_KEY, GOOGLE_CSE_ID } = process.env
