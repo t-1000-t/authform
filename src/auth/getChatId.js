@@ -13,10 +13,10 @@ module.exports = async (req, res) => {
           return res.status(404).json({ message: 'User not found' })
         }
 
-        const botData = await Bot.find({ email: email }).lean()
+        const botData = await Bot.findOne({ email: email }).lean()
 
         // Return the retrieved notes as a response
-        res.status(200).json({ botData })
+        res.status(200).json({ bot: botData })
       } catch (error) {
         console.error('Error fetching notes:', error)
         res.status(500).json({ message: 'Internal Server Error' })

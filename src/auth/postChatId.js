@@ -1,4 +1,4 @@
-// botChtId.js
+// postChatId.js
 const { Bot, User } = require("../models")
 
 module.exports = async (req, res) => {
