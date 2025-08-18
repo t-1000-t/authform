@@ -1,5 +1,5 @@
 // src/agent/agentSearch.js
-const { bot, axios, cheerio } = require('..')
+const { bot } = require('..')
 const hostFromUrl = require('./hostFromUrl')
 const googleSiteSearch = require('./googleSiteSearch')
 const enrichJob = require('./enrichJob')
