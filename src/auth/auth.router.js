@@ -16,7 +16,7 @@ const { telegramBot } = require('../bot/telegramBot')
 const getTalkBot = require('../bot/getTalkBot')
 const postChatId = require('./postChatId')
 const getChatId = require('./getChatId')
-const agentSearch = require('../bot/agentSearch')
+const agentSearch = require('../bot/agentSearchJobs/agentSearch')
 
 
 router
