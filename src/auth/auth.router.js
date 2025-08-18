@@ -16,6 +16,7 @@ const { telegramBot } = require('../bot/telegramBot')
 const getTalkBot = require('../bot/getTalkBot')
 const postChatId = require('./postChatId')
 const getChatId = require('./getChatId')
+const agentSearch = require('../bot/agentSearch')
 
 
 router
@@ -26,6 +27,7 @@ router
   .post('/cvdata', cvdata)
   .post('/cvinfo', getdatacv)
   .post('/cvpdf', generatePdf)
+  .post('/agent/search', agentSearch)
   .post('/foobot', telegramBot)
   .post('/tg/send', getTalkBot)
   .post('/tg/chat', postChatId)
