@@ -11,7 +11,7 @@ const DEFAULT_CHAT_ID = process.env.ADMIN_CHAT_ID // optional: your own chat_id
 
 async function agentSearch(req, res) {
   try {
-    const { url = '', position = '', country = '', town = '', num = 5, toTelegram = true, chat_id } = req.body || {}
+    const { url = '', position = '', country = '', town = '', num, toTelegram = true, chat_id } = req.body || {}
     const host = hostFromUrl(url)
     const { query, items } = await googleSiteSearch({ host, position, town, country, num: Math.min(Math.max(+num || 5, 1), 10) })
 
