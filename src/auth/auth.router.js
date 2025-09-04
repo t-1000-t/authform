@@ -18,7 +18,6 @@ const postChatId = require('./postChatId')
 const getChatId = require('./getChatId')
 const agentSearch = require('../bot/agentSearchJobs/agentSearch')
 
-
 router
   .post('/login', login)
   .post('/signup', register)

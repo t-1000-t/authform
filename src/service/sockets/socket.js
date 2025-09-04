@@ -5,10 +5,7 @@ const User = require('../../models/User')
 let io // <-- module-scoped reference
 
 const initializeSocket = (server) => {
-  const allowedOrigins = [
-    process.env.CLIENT_DOMAIN_URL,
-    process.env.CLIENT_DOMAIN_URL_SUB,
-  ].filter(Boolean)
+  const allowedOrigins = [process.env.CLIENT_DOMAIN_URL, process.env.CLIENT_DOMAIN_URL_SUB].filter(Boolean)
 
   io = socketIO(server, {
     cors: {
