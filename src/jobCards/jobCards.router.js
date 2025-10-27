@@ -1,4 +1,7 @@
 const puppeteer = require('puppeteer')
+const { bot } = require('../bot')
+
+const DEFAULT_CHAT_ID = process.env.ADMIN_CHAT_ID // optional: your own chat_id
 
 module.exports = async (req, res, next) => {
   try {
@@ -29,6 +32,18 @@ module.exports = async (req, res, next) => {
     await new Promise((resolve) => setTimeout(resolve, 2500))
 
     await browser.close()
+
+    if (collected.length > 0) {
+      const target = DEFAULT_CHAT_ID
+      if (target) {
+        try {
+          await bot.telegram.sendMessage(target, collected, { parse_mode: 'HTML', disable_web_page_preview: false })
+        } catch (e) {
+          // don’t fail the API if Telegram send fails
+          console.error('Telegram send failed:', e?.response?.description || e.message)
+        }
+      }
+    }
 
     res.json({ count: collected.length, jobs: collected })
   } catch (err) {
