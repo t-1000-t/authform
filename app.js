@@ -8,6 +8,9 @@ const config = require('./config/config')
 const apiRouter = require('./router/router')
 const initializeSocket = require('./src/service/sockets/socket')
 const { bootBot } = require('./src/bot/bootBot')
+const runAmazonJobScraper = require('./src/service/runAmazonJobScraper')
+
+runAmazonJobScraper()
 
 app.use(
   cors({

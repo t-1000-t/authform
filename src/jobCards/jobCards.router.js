@@ -34,23 +34,45 @@ module.exports = async (req, res, next) => {
 
     await browser.close()
 
-    console.log('collected', collected)
+    const target = DEFAULT_CHAT_ID
 
-    if (collected.length > 0) {
-      const target = DEFAULT_CHAT_ID
-      if (target) {
-        try {
-          await bot.telegram.sendMessage(target, collected, { parse_mode: 'HTML', disable_web_page_preview: false })
-        } catch (e) {
-          // don’t fail the API if Telegram send fails
-          console.error('Telegram send failed:', e?.response?.description || e.message)
+    // build API response first
+    // const payload = { count: collected.length, jobs: collected }
+    // res.json(payload)
+
+    // optional Telegram notify
+    if (target) {
+      try {
+        if (collected.length === 0) {
+          // either skip entirely:
+          // return
+          // ...or send a friendly note:
+          await bot.telegram.sendMessage(target, 'No new jobs found this run.', {
+            parse_mode: 'HTML',
+            disable_web_page_preview: true,
+          })
+        } else {
+          // format a readable message (string, not array)
+          const body = collected
+            .map((j, i) => {
+              const title = j.title || j.jobTitle || 'Untitled'
+              const loc = j.location || j.city || ''
+              const url = j.jobUrl || j.href || ''
+              const header = url ? `<a href="${url}">${title}</a>` : title
+              return `${i + 1}. ${header}${loc ? ` — ${loc}` : ''}`
+            })
+            .join('\n')
+
+          await bot.telegram.sendMessage(target, `Found ${collected.length} job(s):\n\n${body}`, {
+            parse_mode: 'HTML',
+            disable_web_page_preview: true,
+          })
         }
+      } catch (e) {
+        console.error('Telegram send failed:', e?.response?.description || e.message)
       }
     }
-
-    res.json({ count: collected.length, jobs: collected })
   } catch (err) {
     console.error('Error:', err)
-    res.status(500).send('Error: ' + err.message)
   }
 }
