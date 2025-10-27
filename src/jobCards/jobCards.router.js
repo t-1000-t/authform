@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer')
-const chromium = require('chrome-aws-lambda')
 const { bot } = require('../bot')
 
 const DEFAULT_CHAT_ID = process.env.ADMIN_CHAT_ID // optional: your own chat_id
@@ -7,12 +6,9 @@ const DEFAULT_CHAT_ID = process.env.ADMIN_CHAT_ID // optional: your own chat_id
 module.exports = async (req, res, next) => {
   try {
     const browser = await puppeteer.launch({
-      args: chromium.args,
-      defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath,
-      headless: chromium.headless,
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: process.env.CHROME_PATH || puppeteer.executablePath(),
     })
 
     const page = await browser.newPage()
@@ -37,6 +33,8 @@ module.exports = async (req, res, next) => {
     await new Promise((resolve) => setTimeout(resolve, 2500))
 
     await browser.close()
+
+    console.log('collected', collected)
 
     if (collected.length > 0) {
       const target = DEFAULT_CHAT_ID
