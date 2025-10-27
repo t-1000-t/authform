@@ -12,6 +12,11 @@ module.exports = async (req, res) => {
     })
     const page = await browser.newPage()
 
+    // Set User-Agent and other headers as needed
+    await page.setUserAgent(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36',
+    )
+
     // Navigate to the search page
     await page.goto(
       `https://violity.com/en/search/result?auction_id=&query=${encodeURIComponent(searchTerm)}&filter=1&phrase=1`,
