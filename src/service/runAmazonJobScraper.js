@@ -19,6 +19,9 @@ function runAmazonJobScraper() {
     // Every 30 minutes from 07:00–19:30
     const t1 = cron.schedule('0,30 7-19 * * *', run, { timezone })
 
+    // Every 60 minutes from 07:00–19:00
+    // const t1 = cron.schedule('0,30 7-19 * * *', run, { timezone })
+
     // One last run at 20:00
     const t2 = cron.schedule('0 20 * * *', run, { timezone })
 

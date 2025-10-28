@@ -53,17 +53,18 @@ module.exports = async (req, res, next) => {
           })
         } else {
           // format a readable message (string, not array)
-          const body = collected
-            .map((j, i) => {
-              const title = j.title || j.jobTitle || 'Untitled'
-              const loc = j.location || j.city || ''
-              const url = j.jobUrl || j.href || ''
-              const header = url ? `<a href="${url}">${title}</a>` : title
-              return `${i + 1}. ${header}${loc ? ` — ${loc}` : ''}`
-            })
-            .join('\n')
+          // const body = collected
+          //   .map((j, i) => {
+          //     const title = j.title || j.jobTitle || 'Untitled'
+          //     const loc = j.location || j.city || ''
+          //     const url = j.jobUrl || j.href || ''
+          //     const header = url ? `<a href="${url}">${title}</a>` : title
+          //     return `${i + 1}. ${header}${loc ? ` — ${loc}` : ''}`
+          //   })
+          //   .join('\n')
 
-          await bot.telegram.sendMessage(target, `Found ${collected.length} job(s):\n\n${body}`, {
+          // await bot.telegram.sendMessage(target, `Found ${collected.length} job(s):\n\n${body}`, {
+          await bot.telegram.sendMessage(target, `Found ${collected.length}`, {
             parse_mode: 'HTML',
             disable_web_page_preview: true,
           })
