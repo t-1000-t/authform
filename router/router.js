@@ -2,6 +2,7 @@ const express = require('express')
 const { authRouter } = require('../src/auth')
 const { searchRouter } = require('../src/search')
 const { fetchAmazonJobs } = require('../src/jobCards')
+const { rowsSQL } = require('../src/rowsSQL')
 const { usersRouterFactory, getUser, getListUsers, checkToken } = require('../src/users')
 const { User } = require('../src/models')
 
@@ -16,7 +17,7 @@ router.use('/users', usersRouter)
 router.use('/auth', authRouter)
 router.use('/search', searchRouter)
 router.use('/jobcards', fetchAmazonJobs)
-router.use('/rows', () => {})
+router.use('/rows', rowsSQL)
 
 // Violity search route
 
