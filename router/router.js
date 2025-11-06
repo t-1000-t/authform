@@ -17,7 +17,7 @@ router.use('/users', usersRouter)
 router.use('/auth', authRouter)
 router.use('/search', searchRouter)
 router.use('/jobcards', fetchAmazonJobs)
-router.use('/rows', rowsRouter)
+// router.use('/rows', rowsRouter)
 
 // Violity search route
 
