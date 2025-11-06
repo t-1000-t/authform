@@ -1,3 +1,3 @@
-const rowsSQL = require('./rowsSQL.router')
+const rowsRouter = require('./rowsSQL.router')
 
-module.exports = { rowsSQL }
+module.exports = { rowsRouter }

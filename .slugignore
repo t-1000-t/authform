@@ -16,3 +16,11 @@ Thumbs.db
 # Editor files
 .vscode/
 .idea/
+
+**/*.map
+tests/
+docs/
+.github/
+examples/
+node_modules/.cache/
+.git
