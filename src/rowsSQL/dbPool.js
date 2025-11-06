@@ -15,16 +15,16 @@ const poolConnect = () => {
   } else {
     console.log('We use LOCAL DBSQL')
     return mysql.createPool({
-      host: DB_HOST || '127.0.0.1',
+      host: DB_HOST || 'localhost',
       user: DB_USER || 'root',
-      password: DB_PASSWORD || '',
+      password: DB_PASSWORD || '12345',
       database: DB_NAME || 'db_goo',
-      port: Number(DB_PORT || 3306),
+      port: Number(DB_PORT || 5001),
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0,
       // If your provider needs SSL, uncomment:
-      ssl: { rejectUnauthorized: true },
+      //   ssl: { rejectUnauthorized: true },
     })
   }
 }
