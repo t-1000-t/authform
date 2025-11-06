@@ -1,19 +1,7 @@
+// rowsSQL.router.js
 const express = require('express')
+const pool = require('./dbPool')
 const router = express.Router()
-const mysql = require('mysql2')
-const config = require('./config_jawsDB')
-
-// Configure MySQL local connection
-const pool = mysql.createPool({
-  host: config.host,
-  user: config.user,
-  password: config.password,
-  database: config.db,
-  port: config.port_db,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-})
 
 router
   .get('/', (req, res) => {
