@@ -33,5 +33,21 @@ router
       })
     })
   })
+  .delete('/:id', (req, res) => {
+    const { id } = req.params
+
+    pool.query('DELETE FROM users WHERE id = ?', [id], (err, results) => {
+      if (err) {
+        console.log('Database error', err)
+        return res.status(500).json({ error: 'Failed to delete user', details: err.message })
+      }
+
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: 'User not found' })
+      }
+
+      res.json({ message: `User with ID ${id} deleted successfully` })
+    })
+  })
 
 module.exports = router

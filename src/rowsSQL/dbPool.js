@@ -1,5 +1,4 @@
 require('dotenv').config()
-const { connect } = require('mongoose')
 const mysql = require('mysql2')
 
 const { JAWSDB_URL, NODE_ENV, DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT } = process.env
