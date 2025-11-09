@@ -50,7 +50,7 @@ router
         return res.status(404).json({ error: 'User not found' })
       }
 
-      res.json({ message: `User with ID ${id} deleted successfully` })
+      res.json({ rowId: id, message: `User with ID ${id} deleted successfully` })
     })
   })
 
