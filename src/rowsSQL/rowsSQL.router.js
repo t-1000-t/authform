@@ -33,8 +33,12 @@ router
       })
     })
   })
-  .delete('/:id', (req, res) => {
-    const { id } = req.params
+  // req.params
+  // .delete('/:id', (req, res) => {
+  // req.body
+  .delete('/', (req, res) => {
+    const id = Number(req.body.id)
+    if (!Number(req.body.id)) return res.status(400).json({ error: 'Invalid id' })
 
     pool.query('DELETE FROM users WHERE id = ?', [id], (err, results) => {
       if (err) {
