@@ -1,3 +1,4 @@
-const oembedrouter = require('./oembed.router')
+// index.js
+const router = require('./oembed.router')
 
-module.exports = { oembedrouter }
+module.exports = { oembedrouter: router }
