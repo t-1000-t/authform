@@ -11,7 +11,15 @@ const SUPPORTED = ['youtube', 'instagram', 'tiktok', 'facebook', 'threads']
 function detectPlatform(url) {
   const u = (url || '').trim()
   if (!/^https?:\/\//i.test(u)) return null
-  if (/youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\//i.test(u)) return 'youtube'
+
+  // youtube.com + youtu.be + shorts + studio.youtube.com   // NEW: studio
+  if (
+    /youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\//i.test(u) ||
+    /(^https?:\/\/(www\.)?studio\.youtube\.com\/video\/[\w-]{6,}(?:\/[a-z]+)?(?:\?.*)?$)/i.test(u) // NEW
+  ) {
+    return 'youtube'
+  }
+
   if (/instagram\.com\/(p|reel|reels|tv)\//i.test(u)) return 'instagram'
   if (/tiktok\.com\/@.+\/video\/\d+|(^https?:\/\/(vm|vt)\.tiktok\.com\/)/i.test(u)) return 'tiktok'
   if (/facebook\.com\/.+\/videos\/\d+|m\.facebook\.com\/story\.php|fb\.watch\//i.test(u)) return 'facebook'
@@ -28,7 +36,7 @@ const OEMBED_ENDPOINTS = {
   threads: (url) => `https://www.threads.net/oembed?url=${encodeURIComponent(url)}`,
 }
 
-// GET /api/vload/oembed?url=...
+// GET /api/vdownload/oembed?url=...
 router.get('/oembed', async (req, res) => {
   try {
     const { url } = req.query
@@ -64,7 +72,7 @@ router.get('/oembed', async (req, res) => {
   }
 })
 
-// POST /api/vload/urls
+// POST /api/vdownload/urls
 // Body: { url, platform, ownerConsent: boolean }
 router.post('/urls', async (req, res) => {
   try {
@@ -75,24 +83,55 @@ router.post('/urls', async (req, res) => {
       return res.status(400).json({ ok: false, message: 'Invalid or mismatched platform/url' })
     }
 
-    // Enforce "safe mode": do not provide any download for YouTube (or other platforms)
-    // Return guidance or an embed/open option.
+    // Helper: extract YouTube video id from various URL shapes
+    const getYouTubeId = (u) => {
+      try {
+        const x = new URL(u)
+
+        // studio.youtube.com/video/VIDEO[/details|/edit]...   // NEW
+        if (/^(www\.)?studio\.youtube\.com$/i.test(x.hostname)) {
+          const segs = x.pathname.split('/').filter(Boolean) // ['video','VIDEO','details?']
+          if (segs[0] === 'video' && segs[1]) return segs[1]
+        }
+
+        // youtu.be/VIDEO
+        if (x.hostname.includes('youtu.be')) return x.pathname.split('/')[1] || null
+
+        // youtube.com/shorts/VIDEO
+        if (/^\/shorts\//i.test(x.pathname)) return x.pathname.split('/')[2] || null
+
+        // youtube.com/watch?v=VIDEO
+        if (x.searchParams.get('v')) return x.searchParams.get('v')
+      } catch {}
+      return null
+    }
+
     if (platform === 'youtube') {
+      if (ownerConsent) {
+        const vid = getYouTubeId(url)
+        // We’re not downloading — we provide the official Studio route for owners.
+        return res.json({
+          ok: true,
+          policy: 'studio-only',
+          message: 'Open this video in YouTube Studio to download your own upload.',
+          studioUrl: vid ? `https://studio.youtube.com/video/${vid}/edit` : 'https://studio.youtube.com/',
+          openUrl: url,
+        })
+      }
       return res.json({
         ok: false,
         policy: 'no-download',
         message:
-          'Downloading YouTube videos from third-party services is not permitted here. You can use YouTube Studio to download your own uploads, or open the video in YouTube.',
+          'Downloading YouTube videos from third-party services is not permitted here. Open the video in YouTube.',
         openUrl: url,
       })
     }
 
-    // For other platforms, same policy by default (embed/open only).
+    // Other platforms: still no download here
     return res.json({
       ok: false,
       policy: 'no-download',
-      message:
-        'This service does not download from social platforms. You can open the link in the app/site or use the embed above.',
+      message: 'This service does not download from social platforms. Use the platform app/site or the embed.',
       openUrl: url,
     })
   } catch (e) {
