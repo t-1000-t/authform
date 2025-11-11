@@ -6,7 +6,7 @@ const { fetchAmazonJobs } = require('../src/jobCards')
 const { rowsRouter } = require('../src/rowsSQL')
 const { usersRouterFactory, getUser, getListUsers, checkToken } = require('../src/users')
 const { User } = require('../src/models')
-// const { oembedrouter } = require('../src/oembed')
+const { oembedrouter } = require('../src/oembed')
 
 // Inject User into checkToken here
 const checkTokenMiddleware = checkToken(User)
@@ -20,7 +20,7 @@ router.use('/auth', authRouter)
 router.use('/search', searchRouter)
 router.use('/jobcards', fetchAmazonJobs)
 router.use('/rows', rowsRouter)
-// router.use('/vload', oembedrouter)
+router.use('/vdownload', oembedrouter)
 
 // Violity search route
 
